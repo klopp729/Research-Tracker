@@ -259,7 +259,7 @@ export default function GanttView({ projectId, milestones: propMilestones, onTas
         </div>
       </div>
       
-      <style jsx>{`
+      <style>{`
         .gantt-chart-container {
           overflow-x: auto;
         }

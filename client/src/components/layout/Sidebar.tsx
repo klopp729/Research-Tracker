@@ -23,7 +23,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
           <h1 className="text-xl font-semibold text-primary cursor-pointer">研究計画管理</h1>
         </Link>
       </div>
-      
+
       <div className="p-4">
         <Link href="/" onClick={handleClick}>
           <button className="w-full bg-primary hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center justify-center">
@@ -31,7 +31,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
           </button>
         </Link>
       </div>
-      
+
       <div className="overflow-y-auto flex-grow">
         <div className="p-4">
           <h2 className="text-sm font-medium text-gray-500 mb-2">プロジェクト一覧</h2>
@@ -45,14 +45,13 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
             <ul>
               {projects.map((project) => (
                 <li key={project.id} className="mb-1">
-                  <Link href={`/projects/${project.id}`} onClick={handleClick}>
-                    <a className={`block py-2 px-3 rounded-md ${
+                  <Link href={`/projects/${project.id}`} onClick={handleClick}
+                    className={`block py-2 px-3 rounded-md ${
                       location === `/projects/${project.id}` 
                         ? "bg-blue-50 text-primary font-medium" 
                         : "hover:bg-gray-100 transition-colors"
                     }`}>
-                      {project.title}
-                    </a>
+                    {project.title}
                   </Link>
                 </li>
               ))}
@@ -60,7 +59,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
           )}
         </div>
       </div>
-      
+
       <div className="p-4 border-t border-gray-200">
         <div className="flex items-center">
           <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
