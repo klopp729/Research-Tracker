@@ -20,7 +20,7 @@ const formSchema = insertProjectSchema.extend({
 export default function ProjectForm() {
   const { toast } = useToast();
   const { createProject, isCreating } = useProjects();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
