@@ -31,8 +31,8 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <div>
           <div className="flex items-center">
-            <h3 className="text-xl font-bold text-primary">{milestone.title}</h3>
-            <span className="ml-2 text-xs font-medium px-2 py-1 rounded-full bg-secondary text-white">マイルストーン</span>
+            <h3 className="text-xl font-bold text-foreground">{milestone.title}</h3>
+            <span className="ml-2 text-xs font-medium px-2 py-1 rounded-full bg-white text-primary border border-primary">マイルストーン</span>
           </div>
           <div className="flex items-center mt-1 text-sm">
             <i className="ri-calendar-line text-gray-500 mr-1"></i>
