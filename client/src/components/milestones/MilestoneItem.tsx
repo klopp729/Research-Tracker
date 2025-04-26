@@ -46,8 +46,7 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-              {/* Milestone Edit Form would go here */}
-              <div>マイルストーン編集フォーム</div>
+              <MilestoneForm projectId={milestone.projectId} milestone={milestone} />
             </DialogContent>
           </Dialog>
           

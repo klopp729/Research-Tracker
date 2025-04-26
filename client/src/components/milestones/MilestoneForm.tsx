@@ -25,35 +25,47 @@ const formSchema = insertMilestoneSchema.extend({
 
 interface MilestoneFormProps {
   projectId: number;
+  milestone?: Milestone;
+  onSuccess?: () => void;
 }
 
-export default function MilestoneForm({ projectId }: MilestoneFormProps) {
+export default function MilestoneForm({ projectId, milestone, onSuccess }: MilestoneFormProps) {
   const { toast } = useToast();
-  const { createMilestone, isCreating } = useMilestones(projectId);
+  const { createMilestone, updateMilestone, isCreating, isUpdating } = useMilestones(projectId);
   const [isOpen, setIsOpen] = useState(true);
+  const isEditing = !!milestone;
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      deadline: new Date(),
+      title: milestone?.title || "",
+      deadline: milestone ? new Date(milestone.deadline) : new Date(),
       projectId: projectId,
     },
   });
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await createMilestone(values);
-      toast({
-        title: "マイルストーンが作成されました",
-        description: `マイルストーン「${values.title}」を作成しました`,
-      });
+      if (isEditing && milestone) {
+        await updateMilestone({ id: milestone.id, milestone: values });
+        toast({
+          title: "マイルストーンが更新されました",
+          description: `マイルストーン「${values.title}」を更新しました`,
+        });
+      } else {
+        await createMilestone(values);
+        toast({
+          title: "マイルストーンが作成されました",
+          description: `マイルストーン「${values.title}」を作成しました`,
+        });
+      }
       form.reset();
       setIsOpen(false);
+      onSuccess?.();
     } catch (error) {
       toast({
         title: "エラーが発生しました",
-        description: "マイルストーンの作成に失敗しました",
+        description: isEditing ? "マイルストーンの更新に失敗しました" : "マイルストーンの作成に失敗しました",
         variant: "destructive",
       });
     }
