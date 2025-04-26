@@ -42,10 +42,3 @@ git clone https://github.com/klopp729/Research-Tracker.git
 cd Research-Tracker
 npm install
 
-### 起動方法
-
-以下のコマンドで開発サーバーを起動します。
-
-```bash
-npm run dev
-
