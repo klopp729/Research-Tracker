@@ -35,4 +35,7 @@
 - Drizzle ORM
 - PostgreSQL
 
+## アプリ公開URL
+
+[こちらからアクセスできます](https://research-tracker-hosokawakoheide.replit.app/)
 
