@@ -65,7 +65,7 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
           <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
             <i className="ri-user-line text-gray-600"></i>
           </div>
-          <span className="ml-2 text-sm font-medium">山田 太郎</span>
+          <span className="ml-2 text-sm font-medium">細川 航平</span>
         </div>
       </div>
     </div>
