@@ -7,7 +7,9 @@ import TaskForm from "@/components/tasks/TaskForm";
 import { formatDate, getDaysUntil, formatDaysDifference, isPastDue } from "@/lib/utils";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Pencil, MoreHorizontal, Plus } from "lucide-react";
+import { Pencil, MoreHorizontal, Plus, Trash2 } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/hooks/use-toast";
 
 interface MilestoneItemProps {
   milestone: Milestone;
@@ -62,9 +64,31 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
             </DialogContent>
           </Dialog>
           
-          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 ml-1">
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 ml-1">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem 
+                className="text-destructive"
+                onClick={async () => {
+                  const ok = window.confirm("マイルストーンを削除してもよろしいですか？");
+                  if (ok) {
+                    await deleteMilestone(milestone.id);
+                    toast({
+                      title: "マイルストーンが削除されました",
+                      description: `マイルストーン「${milestone.title}」を削除しました`,
+                    });
+                  }
+                }}
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                削除
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       
