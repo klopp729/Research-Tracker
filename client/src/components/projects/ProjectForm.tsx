@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { useProjects } from "@/hooks/useProjects";
 import { insertProjectSchema } from "@shared/schema";
 import { useForm } from "react-hook-form";
@@ -21,6 +22,7 @@ export default function ProjectForm() {
   const { toast } = useToast();
   const { createProject, isCreating } = useProjects();
   const [isOpen, setIsOpen] = useState(true);
+  const [, setLocation] = useLocation();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,13 +35,14 @@ export default function ProjectForm() {
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await createProject(values);
+      const newProject = await createProject(values);
       toast({
         title: "プロジェクトが作成されました",
         description: `プロジェクト「${values.title}」を作成しました`,
       });
       form.reset();
       setIsOpen(false);
+      setLocation(`/projects/${newProject.id}`);
     } catch (error) {
       toast({
         title: "エラーが発生しました",
