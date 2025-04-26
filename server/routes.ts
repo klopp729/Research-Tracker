@@ -10,6 +10,18 @@ import {
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Auth middleware
+  const authMiddleware = (req: any, res: any, next: any) => {
+    const userId = req.headers['x-replit-user-id'];
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+    next();
+  };
+
+  // Apply auth middleware to all API routes
+  app.use('/api', authMiddleware);
+
   // API routes for projects
   app.get("/api/projects", async (req: Request, res: Response) => {
     const projects = await storage.getAllProjects();
