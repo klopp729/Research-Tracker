@@ -38,8 +38,8 @@
 ## セットアップ方法
 
 ```bash
-git clone https://github.com/klopp729/ResearchTracker.git
-cd ResearchTracker
+git clone https://github.com/klopp729/Research-Tracker.git
+cd Research-Tracker
 npm install
 
 ### 起動方法
