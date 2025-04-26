@@ -59,9 +59,10 @@ export default function TaskDetail({ taskId, onClose }: TaskDetailProps) {
     if (!task) return;
     
     try {
+      const { title, description, ...updateData } = values;
       await updateTask({
-        ...values,
         id: task.id,
+        ...updateData,
       });
       toast({
         title: "タスクが更新されました",
