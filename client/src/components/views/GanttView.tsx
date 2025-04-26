@@ -62,6 +62,10 @@ export default function GanttView({ projectId, milestones: propMilestones, onTas
     return allTasks.filter(task => task.milestoneId === milestoneId);
   };
 
+  const isPastDue = (date: string) => {
+    return new Date(date) < new Date();
+  };
+
   const getTaskBarStyle = (task: Task) => {
     const taskDate = new Date(task.dueDate);
     const dayPosition = differenceInDays(taskDate, startDate);
