@@ -158,7 +158,7 @@ export default function CalendarView({ projectId, milestones: propMilestones, on
                 {dayMilestones.map(milestone => (
                   <div 
                     key={`milestone-${milestone.id}`}
-                    className="mt-1 text-xs bg-secondary text-white p-1 rounded overflow-hidden text-ellipsis whitespace-nowrap"
+                    className="mt-1 text-xs bg-red-50 text-gray-900 p-1 rounded overflow-hidden text-ellipsis whitespace-nowrap font-medium"
                   >
                     {milestone.title}
                   </div>
