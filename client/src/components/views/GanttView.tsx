@@ -185,7 +185,7 @@ export default function GanttView({ projectId, milestones: propMilestones, onTas
                   </div>
                   <div className="relative flex-grow h-6">
                     <div 
-                      className="absolute w-0.5 bg-purple-500 h-full"
+                      className="absolute w-1 bg-purple-600 h-full shadow-sm"
                       style={getMilestoneStyle(milestone)}
                     ></div>
                   </div>
