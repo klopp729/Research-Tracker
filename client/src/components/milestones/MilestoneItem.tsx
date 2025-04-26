@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Pencil, MoreHorizontal, Plus, Trash2 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { useMilestones } from "@/hooks/useMilestones"; // Import useMilestones hook
 
 interface MilestoneItemProps {
   milestone: Milestone;
@@ -18,11 +19,13 @@ interface MilestoneItemProps {
 
 export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemProps) {
   const { tasks, isLoading } = useTasks(milestone.id);
+  const { deleteMilestone } = useMilestones(milestone.projectId); // Add deleteMilestone
   const [showAddTask, setShowAddTask] = useState(false);
-  
+  const { toast } = useToast(); // Add useToast
+
   const daysUntil = getDaysUntil(milestone.deadline);
   const isPast = isPastDue(milestone.deadline);
-  
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6" data-milestone-id={milestone.id}>
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
@@ -52,7 +55,7 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
               <MilestoneForm projectId={milestone.projectId} milestone={milestone} />
             </DialogContent>
           </Dialog>
-          
+
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="ghost" size="icon" className="text-gray-400 hover:text-primary ml-1">
@@ -63,7 +66,7 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
               <TaskForm milestoneId={milestone.id} onSuccess={() => setShowAddTask(false)} />
             </DialogContent>
           </Dialog>
-          
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-600 ml-1">
@@ -76,8 +79,8 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
                 onClick={async () => {
                   const ok = window.confirm("マイルストーンを削除してもよろしいですか？");
                   if (ok) {
-                    await deleteMilestone(milestone.id);
-                    toast({
+                    await deleteMilestone(milestone.id); // Use deleteMilestone here
+                    toast({ // Use toast here
                       title: "マイルストーンが削除されました",
                       description: `マイルストーン「${milestone.title}」を削除しました`,
                     });
@@ -91,7 +94,7 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
           </DropdownMenu>
         </div>
       </div>
-      
+
       <div className="p-4 space-y-2">
         {isLoading ? (
           <div className="animate-pulse space-y-2">
@@ -115,7 +118,7 @@ export default function MilestoneItem({ milestone, onTaskClick }: MilestoneItemP
             )}
           </>
         )}
-        
+
         <Dialog>
           <DialogTrigger asChild>
             <Button 
