@@ -36,19 +36,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Auth middleware
-const authMiddleware = (req: any, res: any, next: any) => {
-  const userId = req.headers['x-replit-user-id'];
-  if (!userId) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  next();
-};
-
 (async () => {
   const server = await registerRoutes(app);
-
-  app.use(authMiddleware); // Apply auth middleware to all routes
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

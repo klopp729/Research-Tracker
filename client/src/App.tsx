@@ -12,27 +12,6 @@ import { useState } from "react";
 function Router() {
   // State to control mobile sidebar visibility
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    // Check if user is authenticated by making a test API call
-    fetch('/api/projects')
-      .then(res => {
-        setIsAuthenticated(res.status !== 401);
-      })
-      .catch(() => setIsAuthenticated(false));
-  }, []);
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold mb-4">研究計画管理システム</h1>
-          <p className="text-gray-600 mb-4">続行するにはログインしてください</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
