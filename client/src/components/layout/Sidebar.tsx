@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useProjects } from "@/hooks/useProjects";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import ProjectForm from "@/components/projects/ProjectForm";
 
 interface SidebarProps {
   onItemClick?: () => void;
@@ -25,11 +27,16 @@ export default function Sidebar({ onItemClick }: SidebarProps) {
       </div>
 
       <div className="p-4">
-        <Link href="/" onClick={handleClick}>
-          <button className="w-full bg-primary hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center justify-center">
-            <i className="ri-add-line mr-2"></i> 新しいプロジェクト
-          </button>
-        </Link>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className="w-full bg-primary hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center justify-center">
+              <i className="ri-add-line mr-2"></i> 新しいプロジェクト
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <ProjectForm />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="overflow-y-auto flex-grow">
