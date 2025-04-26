@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Milestone } from "@shared/schema";
+import MilestoneForm from "./MilestoneForm";
 import { useTasks } from "@/hooks/useTasks";
 import TaskItem from "@/components/tasks/TaskItem";
 import TaskForm from "@/components/tasks/TaskForm";
