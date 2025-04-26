@@ -17,14 +17,10 @@ import { getFileIcon } from "@/lib/utils";
 
 // Form schema for task details
 const formSchema = z.object({
-  title: z.string(),
-  description: z.string().optional(),
   status: taskStatusEnum,
-  dueDate: z.date(),
-  notes: z.string().optional(),
-  attachments: z.array(z.any()).optional(),
-  milestoneId: z.number(),
-}).partial();
+  dueDate: z.coerce.date(),
+  notes: z.string().optional().nullable(),
+});
 
 interface TaskDetailProps {
   taskId: number;
