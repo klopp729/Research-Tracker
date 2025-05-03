@@ -19,22 +19,6 @@
   - カレンダービュー
   - ガントチャートビュー
 
-## 使用技術
-
-### フロントエンド
-- React
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- React Query
-- Wouter
-
-### バックエンド
-- Node.js
-- Express
-- Drizzle ORM
-- PostgreSQL
-
 ## アプリ公開URL
 
 [こちらからアクセスできます](https://research-tracker-hosokawakoheide.replit.app/)
